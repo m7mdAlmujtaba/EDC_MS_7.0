@@ -1,0 +1,260 @@
+2020/06/02 14:17:01 http: panic serving [::1]:55111: write tcp [::1]:8000->[::1]:55111: wsasend: An established connection was aborted by the software in your host machine.
+goroutine 87 [running]:
+net/http.(*conn).serve.func1(0xc00021a8c0)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x8621a0, 0xc000069f90)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x965b40, 0xc000069f90)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.SaReportGetHandler(0x96d5e0, 0xc00019e540, 0xc000131800)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/sa.go:13 +0xde
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedAffair.func1(0x96d5e0, 0xc00019e540, 0xc000131800)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:252 +0x264
+net/http.HandlerFunc.ServeHTTP(0xc0001f0f80, 0x96d5e0, 0xc00019e540, 0xc000131800)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000212000, 0x96d5e0, 0xc00019e540, 0xc00016af00)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc3c100, 0x96d5e0, 0xc00019e540, 0xc00016af00)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000ca540, 0x96d5e0, 0xc00019e540, 0xc00016af00)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc00021a8c0, 0x96e0a0, 0xc00004b940)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:14:48 http: panic serving [::1]:64860: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 71 [running]:
+net/http.(*conn).serve.func1(0xc0002123c0)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc0002534e0)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc0002534e0)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0000c88c0, 0xc0002cc100)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0000c88c0, 0xc0002cc100)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0000c88c0, 0xc0002cc100)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0000c88c0, 0xc000186c00)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0000c88c0, 0xc000186c00)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0000c88c0, 0xc000186c00)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc0002123c0, 0x96c020, 0xc00016cc40)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:14:48 http: panic serving [::1]:64861: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 32 [running]:
+net/http.(*conn).serve.func1(0xc0000643c0)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc000253700)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc000253700)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0000c89a0, 0xc0002cc300)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0000c89a0, 0xc0002cc300)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0000c89a0, 0xc0002cc300)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0000c89a0, 0xc000186900)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0000c89a0, 0xc000186900)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0000c89a0, 0xc000186900)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc0000643c0, 0x96c020, 0xc00016ccc0)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:14:48 http: panic serving [::1]:64866: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 33 [running]:
+net/http.(*conn).serve.func1(0xc000065180)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc00012ca20)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc00012ca20)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0001dc0e0, 0xc0000d7a00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0001dc0e0, 0xc0000d7a00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0001dc0e0, 0xc0000d7a00)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0001dc0e0, 0xc0002cc400)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0001dc0e0, 0xc0002cc400)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0001dc0e0, 0xc0002cc400)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc000065180, 0x96c020, 0xc0000f1840)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:15:12 http: panic serving [::1]:64869: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 77 [running]:
+net/http.(*conn).serve.func1(0xc000212500)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc00012cc60)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc00012cc60)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0001dc1c0, 0xc0000d7c00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0001dc1c0, 0xc0000d7c00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0001dc1c0, 0xc0000d7c00)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0001dc1c0, 0xc000186d00)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0001dc1c0, 0xc000186d00)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0001dc1c0, 0xc000186d00)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc000212500, 0x96c020, 0xc00016cf00)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:15:12 http: panic serving [::1]:64870: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 78 [running]:
+net/http.(*conn).serve.func1(0xc0002125a0)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc00033e060)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc00033e060)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0000c8a80, 0xc0002cc600)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0000c8a80, 0xc0002cc600)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0000c8a80, 0xc0002cc600)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0000c8a80, 0xc000186e00)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0000c8a80, 0xc000186e00)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0000c8a80, 0xc000186e00)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc0002125a0, 0x96c020, 0xc00016cf80)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:15:12 http: panic serving [::1]:64873: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 79 [running]:
+net/http.(*conn).serve.func1(0xc0002126e0)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc00041ede0)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc00041ede0)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0001dc2a0, 0xc0000d7e00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0001dc2a0, 0xc0000d7e00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0001dc2a0, 0xc0000d7e00)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0001dc2a0, 0xc000186f00)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0001dc2a0, 0xc000186f00)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0001dc2a0, 0xc000186f00)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc0002126e0, 0x96c020, 0xc00016d0c0)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:15:14 http: panic serving [::1]:64875: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 80 [running]:
+net/http.(*conn).serve.func1(0xc000212780)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc00041f380)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc00041f380)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0000c8b60, 0xc0002cc800)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0000c8b60, 0xc0002cc800)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0000c8b60, 0xc0002cc800)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0000c8b60, 0xc000187000)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0000c8b60, 0xc000187000)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0000c8b60, 0xc000187000)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc000212780, 0x96c020, 0xc00016d140)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:15:14 http: panic serving [::1]:64876: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 81 [running]:
+net/http.(*conn).serve.func1(0xc000212820)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc00033e600)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc00033e600)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0000c8c40, 0xc0002cca00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0000c8c40, 0xc0002cca00)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0000c8c40, 0xc0002cca00)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0000c8c40, 0xc000187100)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0000c8c40, 0xc000187100)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0000c8c40, 0xc000187100)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc000212820, 0x96c020, 0xc00016d1c0)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395
+2020/08/14 18:15:14 http: panic serving [::1]:64879: template: reg_report.html:33:70: executing "reg_report.html" at <.User>: can't evaluate field User in type main.Record
+goroutine 130 [running]:
+net/http.(*conn).serve.func1(0xc0002128c0)
+	c:/go/src/net/http/server.go:1767 +0x140
+panic(0x881a80, 0xc00012d280)
+	c:/go/src/runtime/panic.go:679 +0x1c0
+main.CheckErr(0x964a60, 0xc00012d280)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:285 +0xef
+main.ReportGetHandler(0x96b560, 0xc0001842a0, 0xc000187300)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/registrar.go:232 +0x203
+net/http.HandlerFunc.ServeHTTP(...)
+	c:/go/src/net/http/server.go:2007
+main.AuthanticatedRegistrar.func1(0x96b560, 0xc0001842a0, 0xc000187300)
+	C:/Users/m7md_ali/Desktop/Projects/EDC/EDC SERVER CODE/EDC_MS_7.0/main.go:221 +0x2b2
+net/http.HandlerFunc.ServeHTTP(0xc0001e4d20, 0x96b560, 0xc0001842a0, 0xc000187300)
+	c:/go/src/net/http/server.go:2007 +0x4b
+github.com/gorilla/mux.(*Router).ServeHTTP(0xc000234000, 0x96b560, 0xc0001842a0, 0xc0000d7f00)
+	C:/Users/m7md_ali/go/src/github.com/gorilla/mux/mux.go:210 +0xe9
+net/http.(*ServeMux).ServeHTTP(0xc39100, 0x96b560, 0xc0001842a0, 0xc0000d7f00)
+	c:/go/src/net/http/server.go:2387 +0x1c4
+net/http.serverHandler.ServeHTTP(0xc0000c8540, 0x96b560, 0xc0001842a0, 0xc0000d7f00)
+	c:/go/src/net/http/server.go:2802 +0xab
+net/http.(*conn).serve(0xc0002128c0, 0x96c020, 0xc0002fcc00)
+	c:/go/src/net/http/server.go:1890 +0x87c
+created by net/http.(*Server).Serve
+	c:/go/src/net/http/server.go:2927 +0x395

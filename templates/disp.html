@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Display Students</title>
+    <!-- Main CSS-->
+   
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- =======================================================
+  ======================================================= -->
+
+
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card-5">
+
+                <div class="card-heading">
+                    <h2 class="title">Display Sudents</h2>
+                </div>
+
+                <!-- Search Box-->
+                <div class="row p-30">
+                  <input type="text" id="search_box" name="search_box" class="input-box col-2 m-r-20" placeholder="Search..">
+                </div>
+                
+
+                <div class="card-body"> 
+                  <!-- Here Goes The Table -->
+                    <div id="dynamic_content">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script>
+      $(document).ready(function(){
+        function load_data(page, search=''){
+          $.ajax({
+            url:"ajax",
+            method:"GET",
+            data:{page: page, search: search},
+            success: function(data){
+              $("#dynamic_content").html(data);
+            }
+          })
+        }
+        load_data(1)
+        $(document).on('click', '.page-link', function(){
+          var page = $(this).data('page_number');
+          var query = $('#search_box').val();
+          load_data(page, query);
+        });
+
+        $('#search_box').keyup(function(){
+          var query = $('#search_box').val();
+          load_data(1, query);
+        });
+      });
+
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+
+</html>

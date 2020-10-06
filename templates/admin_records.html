@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Admin Dashboard | Records</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <!--<script src="../static/bootstrap/js/Chart.min.js"></script> -->
+    <script src="../static/bootstrap/js/charts.js"></script>
+
+    <script src="../static/bootstrap/assets/chart-master/Chart.js"></script>
+  <!-- =======================================================
+  ======================================================= -->
+  <style>
+      input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+    }
+    label{
+      color: aliceblue;
+      font-weight: 600;
+      font-size: large;
+    }
+  </style>
+
+</head>
+
+<body>
+    <div class="page-wrapper p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card-6">
+                <div class="card6-heading">
+                    <h2 class="title">Record</h2>
+                </div>
+
+                <div class="card6-body">
+
+                  <!-- Row -->
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                      <div class="info-box blue-bg">
+                        <i class="fa fa-star"></i>
+                        <div class="count">{{.Ts}}</div>
+                        <div class="title">Total Number of Students</div>
+                      </div>
+                      <!--/.info-box-->
+                    </div>
+                    <!--/.col-->
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                      <div class="info-box brown-bg">
+                        <i class="fa fa-id-card-o"></i>
+                        <div class="count">{{.Cs}}</div>
+                        <div class="title">Currently Enrolled Students</div>
+                      </div>
+                      <!--/.info-box-->
+                    </div>
+                    <!--/.col-->
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                      <div class="info-box dark-bg">
+                        <i class="fa fa-file-text-o"></i>
+                        <div class="count">{{.Ps}}</div>
+                        <div class="title">Placement Test Only</div>
+                      </div>
+                      <!--/.info-box-->
+                    </div>
+                    <!--/.col-->
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                      <div class="info-box green-bg">
+                        <i class="fa fa-user-o"></i>
+                        <div class="count">{{.U}}</div>
+                        <div class="title">Accounts</div>
+                      </div>
+                      <!--/.info-box-->
+                    </div>
+                    <!--/.col-->
+
+                  </div>
+                  
+                  <br>
+                  <br>
+                  <!-- Charts -->
+                  <div class="card6-heading">
+                    <h3 class="title">Classes Chart</h3>
+                </div>
+                  <div class="row white-bg">
+
+                    <div class="col-md-6">
+                      <section class="panel">
+                          <header class="panel-heading">
+                              Regular
+                          </header>
+                          <div class="panel-body text-center">
+                              <canvas id="bar" height="300" width="500"></canvas>
+                          </div>
+                      </section>
+                  </div>
+
+                  <div class="col-md-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Midmonth
+                        </header>
+                        <div class="panel-body text-center">
+                            <canvas id="bar2" height="300" width="500"></canvas>
+                        </div>
+                    </section>
+                </div>
+
+                  </div>
+                  <br>
+                  <br>
+                  
+                  <div class="card6-heading">
+                    <h3 class="title">Proceeds</h3>
+                </div>
+                
+                <label> From: </label>
+
+                <input id="from" class="date-input" type="date" name="date-input" required="required"></td>
+                <label> To: </label>
+
+                <input id="to" class="date-input" type="date" name="date-input" required="required"></td>
+                <br>
+                <br>
+                <br> 
+                  
+                
+                <!-- Here Goes The Table -->
+                <div id="dynamic_content">
+
+                </div>
+
+                  
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var d
+
+        $(document).ready(function() {
+          // Chart
+          function load_counts(){
+            $.ajax({
+                url:"lvlcount",
+                method:"GET",
+                data:{},
+                success: function(data){
+                  //console.log(data);
+                  d = JSON.parse(data);
+                  var barChartData = {
+                    labels :  ['Pre 0', 'Pre 1','Pre 2', 'L 1', 'L 2', 'L 3', 'L 4', 'L 5', 'L 6', 'L 7', 'L 8'],
+                    datasets : [
+                        {
+                            fillColor : 'rgba(255, 159, 64, 0.4)',
+                            strokeColor :'rgba(255, 159, 64, 0.4)',
+                            data : d.Regular
+                        }
+                      ]
+                  };
+                  var barChartData2 = {
+                    labels :  ['Pre 0', 'Pre 1','Pre 2', 'L 1', 'L 2', 'L 3', 'L 4', 'L 5', 'L 6', 'L 7', 'L 8'],
+                    datasets : [
+                        {
+                            fillColor : 'rgba(255, 159, 64, 0.4)',
+                            strokeColor :'rgba(255, 159, 64, 0.4)',
+                            data : d.Midmonth
+                        }
+                      ]
+                  };
+                new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+                new Chart(document.getElementById("bar2").getContext("2d")).Bar(barChartData2);
+                }
+              })
+            };   
+          load_counts()
+
+          // Function to Get Students Numbers From Date -- To --> Another
+          //
+          function load_data(date1 ="", date2=""){
+          $.ajax({
+            url:"reportstbl",
+            method:"GET",
+            data:{date1: date1, date2: date2},
+            success: function(data){
+              $("#dynamic_content").html(data);
+              summ()
+            }
+          })
+        }
+        load_data()
+
+        $('.date-input').change(function(){
+          var date1 = $("#from").val()
+          var date2 = $("#to").val()
+          console.log(date1)
+          console.log(date2)
+          load_data(date1, date2)
+        }) 
+        // End of doc.ready    
+        });
+
+        function summ(){
+          var table = document.getElementById("myTable");
+          var tr = table.getElementsByTagName("tr");
+          var sumVal = 0;
+          var sumEn = 0;
+          var sumCer = 0;
+          var sumIn = 0;
+        
+          for(var i = 1; i < table.rows.length - 1; i++)
+          {
+              var td = tr[i].getElementsByTagName("td")[1];
+              var txtValue = td.textContent || td.innerText;
+              console.log(txtValue);
+              console.log(table.rows[i].cells[2].innerHTML);
+              sumVal = sumVal + parseInt(txtValue);
+              sumEn = sumEn + parseInt(table.rows[i].cells[2].innerHTML);
+              sumCer = sumCer + parseInt(table.rows[i].cells[3].innerHTML);
+              sumIn = sumIn + parseInt(table.rows[i].cells[4].innerHTML);
+          }
+          
+          document.getElementById("total_pt").innerHTML = sumVal;
+          document.getElementById("total_en").innerHTML = sumEn;
+          document.getElementById("total_cer").innerHTML = sumCer;
+          document.getElementById("total_in").innerHTML = sumIn;
+        }
+    </script>
+</body>
+</html>

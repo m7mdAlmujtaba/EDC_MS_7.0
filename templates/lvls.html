@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Levels </title>
+    <!-- Main CSS-->
+   
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- ================================================== -->
+  <style>
+    a{
+      text-decoration: none !important;
+      color: #fff;
+      text-align: center;
+      padding: 0;
+    }
+    .count{
+      font-size: 14px !important;
+    }
+    .title{
+      font-size: 16px !important;
+      font-weight: 800;
+    }
+    .btn {
+      padding:30px 5px;
+      width: 220px!important;
+      cursor: pointer;
+      position: relative;
+      border-top-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      transition: all 1s;
+    }
+    .btn:after, .btn:before {
+      content: " ";
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      border: 0px solid #fff;
+      transition: all 1s;
+    }
+    .btn:after {
+      top: -1px;
+      left: -1px;
+      border-top: 5px solid black;
+      border-left: 5px solid black;
+    }
+    .btn:before {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 5px solid black;
+      border-right: 5px solid black;
+    }
+    .btn:hover {
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+    .btn:hover:before, .btn:hover:after {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="page-wrapper p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+        <div class="card-6">
+            <div class="card6-heading">
+                <h2 class="title">Levels</h2>
+            </div>
+
+            <div class="card6-body">
+
+              <!-- Row -->
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=non">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Non Enrolled</div>
+                    <div class="count">{{.Ln}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=p0">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Pre 0</div>
+                    <div class="count">{{.Lp0}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=p1">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Pre 1</div>
+                    <div class="count">{{.Lp1}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=p2">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Pre 2</div>
+                    <div class="count">{{.Lp2}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l1">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 1</div>
+                    <div class="count">{{.Ll1}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l2">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 2</div>
+                    <div class="count">{{.Ll2}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l3">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 3</div>
+                    <div class="count">{{.Ll3}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l4">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 4</div>
+                    <div class="count">{{.Ll4}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l5">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 5</div>
+                    <div class="count">{{.Ll5}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l6">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 6</div>
+                    <div class="count">{{.Ll6}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l7">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 7</div>
+                    <div class="count">{{.Ll7}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <a class="" href="/lvl?level=l8">
+                  <div class="btn info-box blue-bg">
+                    
+                    <div class="title">Level 8</div>
+                    <div class="count">{{.Ll8}}</div>
+                  </div>
+                </a>
+                  <!--/.info-box-->
+                </div>
+                <!--/.col-->
+
+
+              
+              <br>
+              
+            </div>
+
+        </div>
+    </div>
+</div>
+  
+
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+
+body {
+	line-height: 1.2;
+    height: 100%;
+    background: #ffffff url('../img/bg.jpg') no-repeat center top;
+    background-size: cover;
+    font-family: sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+.left-padding
+{
+    padding-left: 15%;
+}
+
+/**********************************
+              COLORS
+***********************************/
+.green, .gold, .info{
+    transition: 0.7s;
+}
+.green:hover{
+    color: #00C851;
+}
+
+.gold:hover{
+    color: gold;
+}
+.danger-color-dark:hover{
+    color:#CC0000;
+}
+.danger-color:hover{
+    color:#ff4444;
+}
+.info:hover{
+    color: #33b5e5;
+}
+.maginta:hover{
+    color: #9933CC;
+}
+.dark-green:hover{
+    columns: #2BBBAD;
+}
+.wow{
+    transition: 0.7s;
+}
+.wow:hover{
+    background: cornsilk;
+}
+/**********************************
+              COLORS
+***********************************/
+
+a
+{
+    text-decoration: none !important;
+    color: #fff;
+}
+
+.content
+{
+	margin-top: 20px;
+	color: #fff;
+}
+
+.section-padding
+{
+	padding: 60px;
+}
+.about-title h2
+{
+	font-size: 24px;
+	text-transform: uppercase;
+    font-family: Montserrat,sans-serif;
+	padding-bottom: 50px;
+}
+.img
+{
+	margin-top: 20px;
+}
+.img i
+{
+	font-size: 44px;
+}
+
+.abt-hd
+{
+	font-size: 20px;
+	font-weight: bold;
+	padding: 15px 0px 15px;
+}
+
+.box
+{
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+
+/**********************************
+Media Queries
+***********************************/
+@media (min-width: 501px) and (max-width: 901px) {
+.section-padding {
+        padding: 100px 30px;
+}
+body{
+    overflow-x:hidden; 
+}
+
+.section-padding {
+        padding: 60px 50px;
+}

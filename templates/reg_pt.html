@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Registrar Dashboard | Placement Test</title>
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+    <link href="../static/css/form_style.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- =======================================================
+  ======================================================= -->
+</head>
+
+<body>
+    <div class="page-wrapper p-t-45 p-b-50">
+
+        <div class="wrapper wrapper--w790">
+            <div class="card-6">
+
+                <div class="card6-heading">
+                    <h2 class="title">Placement Test Form</h2>
+                </div>
+
+                <div class="card6-body">
+
+                    <form method="POST" action="/reg_pt">
+                        <div class="item">
+                        <p>Student Name</p>
+                        <input type="text" name="name" required="required"/>
+                        </div>
+
+                        <div class="item">
+                            <p>Student Phone</p>
+                            <input type="text" name="phone" required="required"/>
+                        </div>
+
+                        <div class="item">
+                        <p> Date</p>
+                        <input type="date" name="ptdate" required="required"/>
+                        </div>
+
+                        <div class="check">
+                           <input type="checkbox" name="checkbox" id="cbox" class="c-box p-t-5" /> 
+                           <label for="cbox" class="c-lbl"> Without Receipt </label>
+                        </div>
+                        <br>
+                        <div class="btn-block">
+                        <button type="submit" onclick="return confirm('Sure you want to Proceed?')">RECEIPT</button>
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>

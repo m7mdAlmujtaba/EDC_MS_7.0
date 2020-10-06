@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Admin Dashboard | Manage Users</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- =======================================================
+  ======================================================= -->
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+           
+            <div class="card-5">
+                <div class="card-heading">
+                    <h2 class="title">Report</h2>
+                </div>
+
+                <div class="card-body">
+                    <h3 class="text-center  title3">Regular</h3>
+                    <table id="myTable" class="table table-dark">
+                        <thead>
+                            
+                          <tr>
+                            <th scope="col">Level</th>
+                            <th scope="col">09:00 - 11:00</th>
+                            <th scope="col">11:00 - 13:00</th>
+                            <th scope="col">13:00 - 15:00</th>
+                            <th scope="col">15:00 - 17:00</th>
+                            <th scope="col">17:00 - 19:00</th>
+                          </tr>
+                          
+                        </thead>
+                        <tbody>
+                            {{ range . }}
+                            <tr>
+                                <th>{{.Level}}</th>
+                                {{ range .Times}}
+                                <td>{{.}}</td>
+                                {{ end}}
+                            </tr>
+                            {{end}}
+                        </tbody>
+                      </table>
+
+
+                    <h3 class="text-center title3">Mid-Month</h3>
+                    <table id="myTable2" class="table table-dark">
+                        <thead>
+                            
+                          <tr>
+                            <th scope="col">Level</th>
+                            <th scope="col">09:00 - 11:00</th>
+                            <th scope="col">11:00 - 13:00</th>
+                            <th scope="col">13:00 - 15:00</th>
+                            <th scope="col">15:00 - 17:00</th>
+                            <th scope="col">17:00 - 19:00</th>
+                          </tr>
+                          
+                        </thead>
+                        <tbody>
+                            {{ range . }}
+                          
+                            <tr>
+                                <th>{{.Level}}</th>
+                                {{ range .STimes}}
+                                <td>{{.}}</td>
+                                {{ end}}
+                            </tr>
+                          
+                            {{end}}
+                        </tbody>
+                      </table>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+    <script>
+            function myFunction() {
+              // Declare variables
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("myTable");
+              tr = table.getElementsByTagName("tr");
+            
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+            function searchByIdFunction() {
+              // Declare variables
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("searchById");
+              filter = input.value
+              table = document.getElementById("myTable");
+              tr = table.getElementsByTagName("tr");
+            
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+        </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+
+</html>

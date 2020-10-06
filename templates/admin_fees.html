@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Admin Dashboard | Manage Fees</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- =======================================================
+  ======================================================= -->
+</head>
+
+<body>
+    <div class="page-wrapper p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+
+            <div class="card-6">
+                <div class="card6-heading">
+                    <h2 class="title">Manage Fees</h2>
+                </div>
+
+                <div class="card6-body">
+                    <table id="myTable" class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Course</th>
+                            <th scope="col">Fees</th>
+                            <th scope="col">Submit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                        {{ range . }}
+                            <tr>
+                                <form action="/admin_fees" method="POST">
+                                  <td><select class="nobg" name="id"><option value="{{ .Id }}" enabled="enabled" selected="selected">{{ .Id }}</option></select></td>
+                                  <td>{{ .Lvl }}</td>
+                                  <td><input class="nobg" type="number" name="editfees" value="{{.Fee}}" required="required"> </td>
+                                  <td><button class="btn btn--radius-2 btn--red m-r-55" type="submit" onclick="return confirm('Sure you want to EDIT this Fees?')"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update </button></td>
+                                </form>
+                            </tr>
+                        {{ end }}
+
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main JS-->
+    <script>
+    let activeCell = null;
+    let cells = document.getElementsByClassName("fee");
+    for(let cell of cells) {
+        cell.addEventListener('dblclick', function() {
+            if(this.childElementCount == 0) {
+                let input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.setAttribute('name', 'editfees');
+                input.setAttribute('value', this.innerHTML);
+                this.innerHTML = "";
+                this.appendChild(input);
+                activeCell = this;
+            }
+        });
+    }
+    document.addEventListener('mouseup', function(e) {
+        if(activeCell != null) {
+            let container = activeCell.children[0];
+            if (!$(container).is(e.target) && $(container).has(e.target).length === 0) 
+            {
+                activeCell.innerHTML = container.value;
+                activeCell = null;
+            }
+        }
+    });
+    </script>
+ 
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+
+</html>

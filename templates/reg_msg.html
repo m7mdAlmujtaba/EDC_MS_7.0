@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Error Message</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <style  rel="stylesheet" type="text/css">
+        .msg-box{
+            width:400px;
+            height: 200px;
+            margin: auto;
+            margin-top: 10%;
+            border:1px solid rgb(20, 20, 20);
+            padding:50px 0;
+        }
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="text-center msg-box">
+        <div class="alert alert-danger" style="margin: auto; margin-bottom: 15px; width: fit-content;">{{.}}</div>
+        <a href="/reg_dashboard" ><button class="btn btn-green">Back</button></a>
+    </div>
+    
+</body>
+</html>

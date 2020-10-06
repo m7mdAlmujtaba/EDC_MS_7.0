@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Students Affair Dashboard | Display Students</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- =======================================================-->
+  <style>
+    input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    }
+    label{
+      color: aliceblue;
+      font-weight: 600;
+      font-size: large;
+    }
+    a{
+      text-decoration: none !important;
+      text-align: center;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            
+            <div class="card-5">
+                <div class="card-heading">
+                    <h2 class="title">To Excel Sheet</h2>
+                </div>
+                
+                <div class="card-body">
+                  <table class="table table-dark">
+                    <thead>
+                      <tr>
+                        <th>
+                          <label> From: </label>
+                          <input id="from" class="date-input nobg filter" type="date" name="date-input" required="required"></td>          
+                        </th>
+                        
+                        <th>
+                          <label> To: </label>
+                          <input id="to" class="date-input nobg filter" type="date" name="date-input" required="required"></td>  
+                        </th>
+              
+                        <th scope="col">
+                          <select class="input--style-5 compobox filter" id="type" name="type" required="required"> 
+                            <option selected="selected">Communication</option>
+                            <option>English Club</option>
+                            <option>IELTS Preparation</option>
+                          </select> 
+                        </th>
+
+                          <th scope="col">
+                            <select class="input--style-5 compobox filter" id="session" name="session">
+                              <option value="Regular" selected="selected">Regular</option>
+                              <option value="Midmonth" >Midmonth</option>
+                            </select>
+                          </th>
+  
+                          <th scope="col">
+                            <select class="input--style-5 compobox filter" id="time" name="time">
+                              <option selected="selected">09:00 - 11:00</option>
+                              <option>11:00 - 13:00</option>
+                              <option>13:00 - 15:00</option>
+                              <option>15:00 - 17:00</option>
+                              <option>17:00 - 19:00</option>
+                            </select>
+                          </th>
+                      </tr>
+                    </thead>
+                  </table>
+
+                  <div class="text-center">
+                    <button class="btn btn--radius-2 btn-success m-r-55" style="margin: 5px 0;" onclick="GetSelected()"> Export to Excel </button>
+                  </div>
+ 
+
+                                  <!-- Search Box-->
+                <div class="row p-30">
+                  <input type="text" id="search_box" name="search_box" class="input-box col-2 m-r-20" placeholder="Search.." onkeyup="myFunction()">
+                </div>
+                
+
+                <div class="card-body"> 
+                  <!-- Here Goes The Table -->
+                    <div id="dynamic_content">
+
+                    </div>
+                </div>
+                <div class="text-center">
+                  <button class="btn"> <a href="/lvls"> BACK </a></button>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+    <script>
+
+      $(document).ready(function(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        var level = urlParams.get("level")
+        console.log(level)
+
+        function load_data(level, page, from="", to="", type="Communication", session="Regular", time="09:00 - 11:00"){
+          $.ajax({
+            url:"excel",
+            method:"GET",
+            data:{level:level, page: page, from: from, to: to, stype: type, ssession: session, time: time},
+            success: function(data){
+              $("#dynamic_content").html(data);
+            }
+          })
+        }
+        load_data(level,1)
+
+        $(document).on('click', '.page-link', function(){
+          var page = $(this).data('page_number');
+          var from = $('#from').val();
+          var from = $('#to').val();
+          var from = $('#type').val();
+          var from = $('#session').val();
+          var from = $('#time').val();
+          load_data(level, page, from, to, type, session, time);
+        });
+
+        $('.filter').change(function(){
+          var from = $('#from').val();
+          var to = $('#to').val();
+          var type = $('#type').val();
+          var session = $('#session').val();
+          var time = $('#time').val();
+          console.log(level, 1, from, to, type, session, time)
+          load_data(level, 1, from, to, type, session, time);
+        });
+
+        
+
+      });
+
+    </script>
+
+    <script>
+            function myFunction() {
+              // Declare variables
+              var input, filter, table, tr, td, td0, i;
+              input = document.getElementById("search_box");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("myTable");
+              tr = table.getElementsByTagName("tr");
+            
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+
+                td0 = tr[i].getElementsByTagName("td")[0];
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td || td0) {
+                  if (td0.innerText.indexOf(filter) > -1 || td.innerText.toUpperCase().indexOf(filter) > -1 ) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+
+                }
+
+              }
+    </script>
+
+    <script>    
+      // Checks all Students in The Table 
+        function checkAll(bx) {
+          var cbs = document.getElementsByTagName('input');
+          for(var i=0; i < cbs.length; i++) {
+            if(cbs[i].type == 'checkbox') {
+              cbs[i].checked = bx.checked;
+            }
+          }
+        }
+
+      // Gets all Selected Students
+        function GetSelected() {
+            //Reference the Table.
+            var grid = document.getElementById("myTable");
+    
+            //Reference the CheckBoxes in Table.
+            var checkBoxes = grid.getElementsByTagName("INPUT");
+            var message = "Id Name                  Country\n";
+    
+            //var body = document.getElementById("newTable")
+            var table = document.createElement("table");
+            var tbody = document.createElement("tbody");
+
+            //Loop through the CheckBoxes.
+            for (var i = 0; i < checkBoxes.length; i++) {
+                if (checkBoxes[i].checked) {
+                    var tr = document.createElement("tr");
+                    
+                    var row = checkBoxes[i].parentNode.parentNode;
+                    for (var j = 0; j < 3; j++){
+                      var td = document.createElement("td");
+                      td.appendChild(document.createTextNode(row.cells[j].innerHTML));
+                      tr.appendChild(td)
+                    }
+                    tbody.appendChild(tr);
+                }
+            }
+            table.appendChild(tbody);
+            // body.appendChild(table);
+            exportTableToExcel(table)
+        }
+
+      // Exports Students to Excel Sheet
+        function exportTableToExcel(tableID, filename = ''){
+          var downloadLink;
+          var dataType = 'application/vnd.ms-excel';
+          //var tableSelect = document.getElementById(tableID);
+          var tableSelect = tableID
+          var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+          
+          // Specify file name
+          filename = filename?filename+'.xls':'excel_data.xls';
+          
+          // Create download link element
+          downloadLink = document.createElement("a");
+          
+          document.body.appendChild(downloadLink);
+          
+          if(navigator.msSaveOrOpenBlob){
+              var blob = new Blob(['\ufeff', tableHTML], {
+                  type: dataType
+              });
+              navigator.msSaveOrOpenBlob( blob, filename);
+          }else{
+              // Create a link to the file
+              downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+          
+              // Setting the file name
+              downloadLink.download = filename;
+              
+              //triggering the function
+              downloadLink.click();
+          }
+      }
+
+        </script>
+
+</body>
+
+</html>

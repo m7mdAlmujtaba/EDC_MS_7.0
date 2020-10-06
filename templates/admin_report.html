@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Admin Dashboard | Admin Report</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- =======================================================
+  ======================================================= -->
+</head>
+
+<body>
+    <div class="page-wrapper p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+
+            <div class="card-6">
+                <div class="card6-heading">
+                    <h2 class="title">Report</h2>
+                </div>
+    
+
+                <div class="card6-body">
+                    <h3 class="text-center title3">This Day</h3>
+
+                    <table id="dayTable" class="table table-dark">
+                        <thead>
+                            
+                          <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Placement Test Students</th>
+                            <th scope="col">Enrolled Students</th>
+                            <th scope="col">Certificates/Statements</th>
+                            <th scope="col">Total Income</th>
+                          </tr>
+                          
+                        </thead>
+                        <tbody>
+                            {{ range . }}
+                            <tr>
+                                <td>{{ .Usr }}</td>
+                                <td>{{ .Dptcount }}</td>
+                                <td> {{ .Dencount }} </td>
+                                <td>{{ .Dcercount }} </td>
+                                <td>{{ .Dt }} </td>
+                            </tr>
+                            {{end}}
+                            <tr>
+                              <th>Total</th>
+                              <td id="total_num_dpt"></td>
+                              <td id="total_num_den"></td>
+                              <td id="total_num_dcer"></td>
+                              <td id="total_fees_d"></td>
+                            </tr>
+                        </tbody>
+                      </table>
+
+
+                    <h3 class="text-center title3">Last Week</h3>
+                    <table id="weekTable" class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Placement Test Students</th>
+                            <th scope="col">Enrolled Students</th>
+                            <th scope="col">Certificates/Statements</th>
+                            <th scope="col">Total Income</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {{range.}}
+                            <tr>
+                              <td>{{ .Usr }}</td>
+                              <td>{{ .Wptcount }}</td>
+                              <td> {{ .Wencount }} </td>
+                              <td>{{ .Wcercount }} </td>
+                              <td>{{ .Wt }} </td>
+                            </tr>
+                            {{end}}
+                            <tr>
+                              <th>Total</th>
+                              <td id="total_num_wpt"></td>
+                              <td id="total_num_wen"></td>
+                              <td id="total_num_wcer"></td>
+                              <td id="total_fees_w"></td>
+                            </tr>
+                        </tbody>
+                      </table>
+
+                      <h3 class="text-center title3">Last Month</h3>
+                    <table id="monthTable" class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Placement Test Students</th>
+                            <th scope="col">Enrolled Students</th>
+                            <th scope="col">Certificates/Statements</th>
+                            <th scope="col">Total Income</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {{range.}}
+                            <tr>
+                              <td>{{ .Usr }}</td>
+                              <td>{{ .Mptcount }}</td>
+                              <td> {{ .Mencount }} </td>
+                              <td>{{ .Mcercount }} </td>
+                              <td>{{ .Mt }} </td>
+                            </tr>
+                            {{ end }}
+                            <tr>
+                              <th>Total</th>
+                              <td id="total_num_mpt"></td>
+                              <td id="total_num_men"></td>
+                              <td id="total_num_mcer"></td>
+                              <td id="total_fees_m"></td>
+                            </tr>
+                        </tbody>
+                      </table>
+
+                      <a href="/admin_acts">
+                        <button class="btn more-details"> More Details </button>
+                      </a>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getTotal(table){
+          var table = document.getElementById(table);
+          var sumnumpt = 0;
+          var sumnumen = 0;
+          var sumnumcer = 0;
+          var sumfees = 0;
+
+        
+          for(var i = 1; i < table.rows.length - 1; i++)
+          {
+              sumnumpt = sumnumpt + parseInt(table.rows[i].cells[1].innerHTML);
+              sumnumen = sumnumen + parseInt(table.rows[i].cells[2].innerHTML);
+              sumnumcer = sumnumcer + parseInt(table.rows[i].cells[3].innerHTML);
+              sumfees = sumfees + parseInt(table.rows[i].cells[4].innerHTML);
+          }
+          return [sumnumpt, sumnumen, sumnumcer, sumfees]
+        }
+        
+        var dayTotal = getTotal("dayTable")
+        document.getElementById("total_num_dpt").innerHTML = dayTotal[0];
+        document.getElementById("total_num_den").innerHTML = dayTotal[1];
+        document.getElementById("total_num_dcer").innerHTML = dayTotal[2];
+        document.getElementById("total_fees_d").innerHTML = dayTotal[3];
+
+        var weekTotal = getTotal("weekTable")
+        document.getElementById("total_num_wpt").innerHTML = weekTotal[0];
+        document.getElementById("total_num_wen").innerHTML = weekTotal[1];
+        document.getElementById("total_num_wcer").innerHTML = weekTotal[2];
+        document.getElementById("total_fees_w").innerHTML = weekTotal[3];
+
+        var monthTotal = getTotal("monthTable")
+        document.getElementById("total_num_mpt").innerHTML = monthTotal[0];
+        document.getElementById("total_num_men").innerHTML = monthTotal[1];
+        document.getElementById("total_num_mcer").innerHTML = monthTotal[2];
+        document.getElementById("total_fees_m").innerHTML = monthTotal[3];
+
+
+
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+
+</html>

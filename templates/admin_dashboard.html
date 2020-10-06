@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Admin Dashboard</title>
+  <link href='https://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,400italic,300italic,300|Raleway:300,400,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/dashboard_style.css">
+  <!-- =======================================================
+
+  ======================================================= -->
+</head>
+
+<body>
+  <div class="content">
+    <section id="about" class="section-padding">
+      <div class="container">
+        <div style="margin-bottom: 1px; display: flex; align-items: center;">
+          <i class="fa fa-user-o"  style="float: left; margin-right: 15px; vertical-align: middle;"></i> <h4  style="float: left; vertical-align: middle;">{{.}}</h4>
+        </div>
+        <div class="row">
+            <div class="about-title text-center">
+                <h2>ADMIN DASHBOARD</h2>
+            </div>
+          <div class="col-md-12 col-sm-12 text-center left-padding">
+
+            <div class="col-md-3 col-sm-4 col-xs-6 wow fadeInUp delay-02s box">
+                <a class="green" href="/admin_records">
+              <div class="img">
+                <i class="fa fa-bar-chart"></i>
+              </div>
+              <h3 class="abt-hd">Statistics</h3></a>
+            </div>
+
+
+            <div class="col-md-3 col-sm-4 col-xs-6 wow fadeInUp delay-04s box">
+                <a class="maginta" href="/admin_fees">
+              <div class="img">
+                <i class="fa fa-money" aria-hidden="true"></i>
+              </div>
+              <h3 class="abt-hd">Manage Fees</h3></a>
+            </div>
+
+
+            <div class="col-md-3 col-sm-4 col-xs-6 wow fadeInUp delay-08s box">
+                <a class="info" href="/admin_disp">
+              <div class="img">
+                <i class="fa fa-television"></i>
+              </div>
+              <h3 class="abt-hd">Students</h3></a>
+            </div>
+
+
+            <div class="col-md-3 col-sm-4 col-xs-6 wow fadeInUp delay-08s box">
+                <a class="gold" href="/admin_users">
+              <div class="img">
+                <i class="fa fa-user-plus"></i>
+              </div>
+              <h3 class="abt-hd">Manage Users</h3></a>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 wow fadeInUp delay-08s box">
+                <a href="/admin_report" class="dark-green">
+                <div class="img">
+                  <i class="fa fa-print"></i>
+                </div>
+                <h3 class="abt-hd">Report</h3></a>
+              </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 wow fadeInUp delay-08s box">
+              <a class="danger-color-dark" href="/logout">
+              <div class="img">
+                <i class="fa fa-sign-out"></i>
+              </div>
+              <h3 class="abt-hd">Log Out</h3>
+            </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  </div>
+  
+
+</body>
+
+</html>

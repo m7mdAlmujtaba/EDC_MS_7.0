@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Admin Dashboard | Manage Users</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- =======================================================
+  ======================================================= -->
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            
+            <div class="card-6">
+                <div class="card6-heading">
+                    <h2 class="title">Day Report</h2>
+                </div>
+
+                
+                <div class="card6-body" style="height:750px;overflow:auto;">
+                  
+
+                  <table class="table table-dark">
+                    <tr>
+                      <th>
+                        <i class="fa fa-user-o" >
+                        </i> 
+                        &nbsp;
+                        {{.Usr}}
+                      </th>
+
+                        <th>Date: &nbsp; {{.Repdate}}</th>
+                        <th>
+                          Time:  &nbsp; {{.Reptime}}
+                        </th> 
+                    </tr>
+                <tr>
+                  </table>
+
+                  <table id="myTable" class="table table-dark">
+
+                            <thead>
+                            <th scope="col">Receipts</th>
+                            <th scope="col">Number Of Students</th>
+                            <th scope="col">Fees (SDG)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        
+                        
+                          <tr>
+                            <th scope="col">Placement Test Students</th>
+                            <td scope="col">{{.Dptcount}}</td>
+                            <td scope="col">{{.Dptfee}}</td>
+                          </tr>
+                            
+                            <tr>
+                                <th scope="col">Enrollments</th>
+                                <td scope="col">{{.Dencount}}</td>
+                                <td scope="col">{{.Denfee}}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="col">Certificates & Statements</th>
+                                <td scope="col">{{.Dcercount}}</td>
+                                <td scope="col">{{.Dcerfee}}</td>
+                            </tr>
+
+                            <tr>
+                            <th>Total</th>
+                            <td id="total_num"></td>
+                            <td id="total_fees"></td>
+                            </tr>
+
+                        </tbody>
+                      </table>
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    var table = document.getElementById("myTable");
+        var tr = table.getElementsByTagName("tr");
+        var sumnum = 0;
+        var sumfees = 0;
+
+      
+        for(var i = 1; i < table.rows.length - 1; i++)
+        {
+            sumnum = sumnum + parseInt(table.rows[i].cells[1].innerHTML);
+            sumfees = sumfees + parseInt(table.rows[i].cells[2].innerHTML);
+        }
+        
+        document.getElementById("total_num").innerHTML = sumnum;
+        document.getElementById("total_fees").innerHTML = sumfees;
+
+    </script>
+
+</body>
+</html>

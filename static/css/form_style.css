@@ -1,0 +1,79 @@
+
+html, body {
+min-height: 100%;
+}
+body, div, form, input, select, textarea, p { 
+padding: 0;
+margin: 0;
+outline: none;
+font-family: Roboto, Arial, sans-serif;
+font-size: 14px;
+color: #666;
+line-height: 22px;
+}
+form {
+margin: auto;
+width: 80%;
+padding: 50px;
+border-radius: 6px;
+background: #fff;
+box-shadow: 0 0 20px 0 #a82877; 
+}
+
+input, textarea, select {
+margin-bottom: 15px;
+border: 1px solid #ccc;
+border-radius: 3px;
+}
+input {
+width: calc(100% - 50px);
+padding: 5px;
+}
+
+.item input:hover, .item select:hover, .item textarea:hover {
+border: 1px solid transparent;
+box-shadow: 0 0 6px 0 #a82877;
+color: #a82877;
+}
+.item {
+position: relative;
+margin: 10px 0;
+}
+input[type="date"]::-webkit-inner-spin-button {
+display: none;
+}
+
+
+input[type=radio]:checked + label:after {
+opacity: 1;
+}
+.btn-block {
+margin-top: 10px;
+text-align: center;
+}
+button {
+width: 150px;
+padding: 10px;
+border: none;
+border-radius: 5px; 
+background: #a82877;
+font-size: 16px;
+color: #fff;
+cursor: pointer;
+}
+button:hover {
+background: #bf1e81;
+}
+@media (min-width: 568px) {
+.name-item, .city-item {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+}
+.name-item input, .city-item input {
+width: calc(50% - 20px);
+}
+.city-item select {
+width: calc(50% - 8px);
+}
+}

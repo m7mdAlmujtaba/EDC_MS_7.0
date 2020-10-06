@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Admin Dashboard | Manage Users</title>
+
+    <!-- Main CSS-->
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+      input[type="text"]{
+        padding: 0 10px ;
+      }
+      .lbl{
+        border: none;
+      }
+    </style>
+    <script> 
+      $(function(){
+            $("#modalForm").on('show.bs.modal', function(event){
+              var btn = $(event.relatedTarget)
+              var stid = btn.data('id')
+              var uname = btn.data('user')
+
+              var modal = $(this)
+              modal.find('#uid').text(stid)
+              modal.find('#uid').val(stid)
+              modal.find('#uid').prop('readonly',true)
+
+              modal.find('#user').text(uname)
+              modal.find('#user').val(uname)
+              modal.find('#user').prop('readonly',true)
+                });
+              })
+    </script>
+  <!-- ======================================================= -->
+</head>
+
+<body>
+
+  <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Update User Password</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="studentDetails" class="modal-body"></div>
+        
+        <div class="modal-body mx-3">
+          
+          <form action="/edit_pass" method="POST">
+            <div class="item">
+              <label >User id: </label>
+              <input type="text" class="lbl" name="id" id="uid">
+            </div>
+              <br>
+              <div class="item">
+                <label>Username: </label>
+                <input type="text" class="lbl" name="username" id="user">
+              </div>
+                <br>
+            <div class="item">
+              <label>New Password: </label>
+              <input class="" type="text" name="userpass" required="required">
+            </div>
+
+          <br>
+
+          <button class="btn btn--radius-2 btn--red m-r-55" type="submit" onclick="return confirm('Sure you want to Proceed?')"> Edit </button>
+                  
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+    <div class="page-wrapper  p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+           
+            <div class="card-6">
+                <div class="card6-heading">
+                    <h2 class="title">Manage Users</h2>
+                </div>
+                
+
+                <div class="card6-body">
+                    <table id="myTable" class="table table-dark">
+                        <thead>
+                          <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Type</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <form action="/admin_users" method="POST">
+                              <td><label>ID</label> </td>
+            
+                              <td><input class="table-input" type="text" name="username"> </td>
+                              <td><input class="table-input" type="text" name="userpass"></td> 
+            
+                              <td><select class="input--style-5 compobox" name="usertype">
+                                      <option value="Admin">Admin</option>
+                                      <option value="Registrar" selected="selected">Registrar</option>
+                                      <option value="Affair">Student Affair</option>
+                              </select> </td>
+            
+                              
+                                <td><button class="btn btn--radius-2 btn-success m-r-55" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Add User </button></td>
+                            </form>
+                        </tr>
+
+                        {{ range . }}
+                        <form action="/remove" method="POST">
+                            <tr>
+                              <td><select class="nobg" name="id"><option value="{{ .ID }}" enabled="enabled" selected="selected">{{ .ID }}</option></select></td>
+                              <td>{{ .Uname }}</td>
+                              <td> {{ .Upass }} </td>
+                              <td>{{ .Utype }} </td>
+                              <td><button class="btn btn--radius-2 btn-warning m-r-55" type="button" data-id="{{.ID}}" data-user="{{.Uname}}" data-toggle="modal" data-target="#modalForm"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Password </button> </td>
+                              <td><button class="btn btn--radius-2 btn--red m-r-55" type="submit" onclick="return confirm('Sure you want to REMOVE this user?')"> <i class="fa fa-times" aria-hidden="true"></i> Remove User </button> </td>
+                        </tr>
+                        </form>
+                        {{ end }}
+                        
+
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

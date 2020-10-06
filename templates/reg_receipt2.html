@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDC | Registrar Dashboard | Receipt</title>
+    <!-- Main CSS-->
+    <link href="../static/css/reg_receipt.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    
+</head>
+
+<body>
+  {{range.}}
+    <div class="invoice-box" id="invoice-box-id">
+
+        <div class="row brd-b header">
+
+            <div class="row pad-left-50 col-10">
+
+                <div class="col-sm-2 img-box">
+                    <img class="img-fluid" src="../static/img/logo.png">
+                </div>
+
+                <div class="col-sm-8 brand">
+                        <h2>EDC</h2>
+                        <h3>English Discussion Center</h3>
+                </div>
+            </div>
+
+            <div class="row pad-left-50 col-2 text-center">
+              <div class="brd-l pad-top">
+                      <h1 >{{.Year}}</h1>
+              </div>
+            </div>
+            
+        </div>
+
+        <h2 class="text-center receipt">{{.Recp_type}} <span>Receipt</span></h2>
+        <div class="mrg-left-25">
+            <div class="container">
+                <ul class="responsive-table">
+                  <li class="table-header ">
+
+                    <div class="col col-2">Student Id: </div>
+                    <div class="col col-2">{{.Std_id}}</div>
+                    <div class="col col-2">Receipt No: </div>
+                    <div class="col col-2">{{.Recp_id}}</div> 
+                    <div class="col col-2">Date: </div>
+                    <div class="col col-2">{{.Date}}</div> 
+
+                  </li>
+                  <li class="table-row">
+                    <div class="col col-3 bold-text">Student Name:</div>
+                    <div class="col col-9 f-w-4">{{.Std_name}}</div>
+                  </li>
+
+                    <li class="table-row">
+
+                      <div class="row sm-row col-6">
+                          <div class="col-6 bold-text">Course Session</div>
+                          <div class="col-6" >{{.Std_session}}</div>
+                      </div>
+                      <div class="row sm-row col-6">
+                          <div class="col-6 bold-text">Time/Class</div>
+                          <div class="col-6" >{{.Std_Time}}</div>
+                      </div>
+                      
+
+                    </li>
+                  
+                  <li class="table-row">
+                      <div class="row sm-row col-6">
+                          <div class="col-6 bold-text">Suggested Level</div>
+                          <div class="col-6" >{{.Std_lvl}}</div>
+                      </div>
+                      <div class="row sm-row col-6">
+                          <div class="col-5 bold-text">Fees</div>
+                          <div class="col-7" >{{.Std_fees}} <span>SDG</span></div>
+                      </div>
+                      
+                  </li>
+                </ul>
+              </div>
+        </div>
+
+        <div class="text-center reg">
+            <h4 class="t-brd bold-text">Registrar Signature</h4>
+        </div>
+    </div>
+  {{end}}
+</body>
+</html>

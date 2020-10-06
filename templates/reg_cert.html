@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDC | Registrar Dashboard | Certificate</title>
+  
+  <link href="../static/css/style.css" rel="stylesheet" media="all">
+  <link  href="../static/css/pop_form_style.css" rel="stylesheet" media="all">
+  <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+
+  <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+  <script src="../static/bootstrap/js/jquery.min.js"></script>
+  <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <script> 
+    $(function(){
+          $("#modalForm").on('show.bs.modal', function(event){
+            var btn = $(event.relatedTarget)
+            var stid = btn.data('id')
+            var modal = $(this)
+            modal.find('#sid').text(stid)
+            modal.find('#sid').val(stid)
+            modal.find('#sid').prop('readonly',true)
+              });
+            })
+  </script>
+  <!-- =======================================================
+  ======================================================= -->
+</head>
+
+<body>
+  <!-- Start of the Modal -->
+  <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Receipt Type</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="studentDetails" class="modal-body"></div>
+        
+        <div class="modal-body mx-3">
+          
+          <form action="/reg_cert" method="POST">
+ 
+            <div class="item">
+              <input name="id" id="sid" value="test">
+            </div>
+            
+
+            <div class="item">
+              <select class="input--style-5" name="level" required="required">
+                <option disabled="disabled" selected="selected">Select Level</option>
+                <option>Pre 0</option>
+                <option>Pre 1</option>
+                <option>Pre 2</option>
+                <option>Level 1</option>
+                <option>Level 2</option>
+                <option>Level 3</option>
+                <option>Level 4</option>
+                <option>Level 5</option>
+                <option>Level 6</option>
+                <option>Level 7</option>
+                <option>Level 8</option>
+              </select>
+            </div>
+
+            <div class="item">
+              <select class="input--style-5" name="statment_type">
+                <option disabled="disabled" selected="selected">Select Type</option>
+                <option>Certificate</option>
+                <option>Statement</option>
+                <option>Freeze</option>
+            </select>
+            </div>
+
+            <div class="item">
+              <input class="" type="date" name="certdate" required="required">
+            </div>
+
+          <br>
+
+          <button class="btn btn--radius-2 btn--red m-r-55" type="submit" onclick="return confirm('Sure you want to Proceed?')"> OK </button>
+                  
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  <!-- End of Modal-->
+
+
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+               
+            <div class="card-5">
+                <div class="card-heading">
+                    <h2 class="title">Certificate</h2>
+                </div>
+                <!-- Search Box-->
+                <div class="row p-30">
+                  <input type="text" id="search_box" name="search_box" class="input-box col-2 m-r-20" placeholder="Search..">
+                </div>
+                
+                <div class="card-body">
+                  <!-- Here Goes The Table -->
+                  <div id="dynamic_content">
+
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      $(document).ready(function(){
+        function load_data(page, search=''){
+          $.ajax({
+            url:"cert",
+            method:"GET",
+            data:{page: page, search: search},
+            success: function(data){
+              $("#dynamic_content").html(data);
+            }
+          })
+        }
+        load_data(1)
+        $(document).on('click', '.page-link', function(){
+          var page = $(this).data('page_number');
+          var query = $('#search_box').val();
+          load_data(page, query);
+        });
+    
+        $('#search_box').keyup(function(){
+          var query = $('#search_box').val();
+          load_data(1, query);
+        });
+      });
+    
+    </script>
+    
+    
+</body>
+</html>

@@ -1,0 +1,2 @@
+mysqld --console
+PAUSE

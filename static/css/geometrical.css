@@ -1,0 +1,26 @@
+.p-t-45 {
+    padding-top: 45px;
+  }
+  
+  .p-b-50 {
+    padding-bottom: 50px;
+  }
+
+  .h-40{
+    height: 40px;
+  }
+
+  .p-30{
+    padding: 10px 15px;
+  }
+.c-box{
+  width: 25px;
+  float: left;
+}
+.c-lbl{
+  width: 300px;
+  float: left;
+}
+.p-t-5{
+  margin-top: 4px;
+}

@@ -261,7 +261,7 @@ func Recordbetween(date1, date2 time.Time)[]Record{
 func editStd(w http.ResponseWriter,r *http.Request){
 	r.ParseForm()
 	var std = Student{}
-	std.Sid, err = strconv.Atoi(r.PostForm.Get("id"))
+	std.id, err = strconv.Atoi(r.PostForm.Get("id"))
 	CheckErr(err)
 
 	std.Sname = r.PostForm.Get("name")

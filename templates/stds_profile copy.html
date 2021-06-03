@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDC | Students Profile Pictures</title>
+    <!-- Main CSS-->
+
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+    <link href="../static/css/pop_form_style.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/cropperjs/cropper.min.css">
+    <!-- =======================================================
+  ======================================================= -->
+    <script>
+        $(function () {
+            $("#modalForm").on('show.bs.modal', function (event) {
+                var btn = $(event.relatedTarget)
+                var stid = btn.data('id');
+                var pic_path = btn.data('pic');
+                var modal = $(this)
+                modal.find('#sid').text(stid)
+                modal.find('#sid').val(stid)
+                modal.find('#sid').prop('readonly', true)
+
+                modal.find('#spic').attr("src", pic_path);
+
+            });
+        })
+    </script>
+ <style type="text/css">
+    img {
+        display: block;
+        max-width: 100%;
+    }
+    .preview {
+        overflow: hidden;
+        width: 160px; 
+        height: 160px;
+        margin: 10px;
+        border: 1px solid red;
+    }
+    
+</style>
+</head>
+
+<body>
+    <!-- Start of the Modal -->
+    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Edit Student Informations</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="studentDetails" class="modal-body"></div>
+
+                <div class="modal-body mx-3">
+
+                    <form action="/stds_profile_upload" enctype="multipart/form-data" method="POST">
+                        <div class="item">
+                            <input name="id" id="sid" value="">
+                        </div>
+                        <div class="item">
+                            <label name="name" id="sname" value="">
+                        </div>
+                        <div>
+                            <img src="" id="spic" style="width: 150px;height: auto">
+                        </div>
+                        <label for="avatar">Choose a profile picture:</label>
+
+                        <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                        <br>
+
+                        <button class="btn btn--radius-2 btn--red m-r-55" type="submit"
+                            onclick="return confirm('Sure you want to Proceed?')"> Update </button>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- End of Modal-->
+
+
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card-5">
+
+                <div class="card-heading">
+                    <h2 class="title">Display Sudents</h2>
+                </div>
+
+                <!-- Search Box-->
+                <div class="row p-30">
+                    <input type="text" id="search_box" name="search_box" class="input-img input-box col-2 m-r-20"
+                        placeholder="Search..">
+                </div>
+
+
+                <div class="card-body">
+                    <!-- Here Goes The Table -->
+                    <div id="dynamic_content">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 
+        Cropper Js
+    -->
+    <div class="crop_modal fade" id="crop_modal" tabindex="-1" role="dialog" aria-labelledby="crop_modalLabel" aria-hidden="true">
+        <div class="crop_modal-dialog crop_modal-lg" role="document">
+            <div class="crop_modal-content">
+                <div class="crop_modal-header">
+                    <h5 class="crop_modal-title" id="crop_modalLabel">Crop image</h5>
+                    <button type="button" class="close" data-dismiss="crop_modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="crop_modal-body">
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col-md-8">  
+                                <!--  default image where we will set the src via jquery-->
+                                <img id="image">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="crop_modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="crop_modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+    <script>
+        $(document).ready(function () {
+            function load_data(page, search = '') {
+                $.ajax({
+                    url: "stds_profile",
+                    method: "GET",
+                    data: { page: page, search: search },
+                    success: function (data) {
+                        $("#dynamic_content").html(data);
+                    }
+                })
+            }
+            load_data(1)
+            $(document).on('click', '.page-link', function () {
+                var page = $(this).data('page_number');
+                var query = $('#search_box').val();
+                load_data(page, query);
+            });
+
+            $('#search_box').keyup(function () {
+                var query = $('#search_box').val();
+                load_data(1, query);
+            });
+        });
+
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+
+</html>

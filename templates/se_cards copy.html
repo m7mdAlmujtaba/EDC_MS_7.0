@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EDC | Generate Students Cards</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card-5">
+                <div class="card-heading">
+                    <h2 class="title">Enrollment Form</h2>
+                </div>
+                <!-- Search Box-->
+                <div class="row p-30">
+                    <input type="text" id="search_box" name="search_box" class="input-box col-2 m-r-20"
+                        placeholder="Search..">
+                </div>
+
+                <div class="card-body">
+                    <!-- Cards Page-->
+                    <div>
+                        <a class="cards-btn btn btn-success" href="cards.html">Cards <span>0</span></a>
+                        <a class="btn text-light" onclick="clearStorge()"><i class="fa fa-close"></i> <span>Clear</span></a>
+                    </div>
+
+                    <!-- Here Goes The Table -->
+                    <div id="dynamic_content">
+                        <table id='myTable' class='table table-dark'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Student Image</th>
+                                    <th scope="col">Student Name</th>
+                                    <th scope="col">Level</th>
+                                    <th scope="col">Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> 12345 </td>
+                                    <td> <img src="../uploads/31901.png" style='width:50px; height:auto;'
+                                            class="profile-pic"> </td>
+                                    <td> Mohammed Something</td>
+                                    <td> Level 7</td>
+                                    <td> <button class="addstd-btn btn btn--radius-2 btn--red m-r-55"
+                                            data-json='{"id": "123", "name": "Mohammed Something", "level": "Level 7", "time":"09:00-11:00", "date":"15-7-2021", "imgpath":"../uploads/31900.png"}'>
+                                            <i class="fa fa-plus" aria-hidden="true"></i> Add to Cards </button> </td>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td> 12346 </td>
+                                    <td> <img src="../uploads/31901.png" style='width:50px; height:auto;'
+                                            class="profile-pic"> </td>
+                                    <td> Mohammed Almujtaba</td>
+                                    <td> Level 7</td>
+                                    <td> <button class="addstd-btn btn btn--radius-2 btn--red m-r-55"
+                                            data-json='{"id": "124", "name": "Mohammed Almujtaba", "level": "Level 7", "time":"09:00-11:00", "date":"15-7-2021", "imgpath":"../uploads/31900.png"}'>
+                                            <i class="fa fa-plus" aria-hidden="true"></i> Add to Cards </button> </td>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td> 12347 </td>
+                                    <td> <img src="../uploads/31901.png" style='width:50px; height:auto;'
+                                            class="profile-pic"> </td>
+                                    <td> Mohammed Omran</td>
+                                    <td> Level 7</td>
+                                    <td> <button class="addstd-btn btn btn--radius-2 btn--red m-r-55"
+                                            data-json='{"id": "125", "name": "Mohammed Omran", "level": "Level 7", "time":"09:00-11:00", "date":"15-7-2021", "imgpath":"../uploads/31900.png"}'> <i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add to Cards </button> </td>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td> 12348 </td>
+                                    <td> <img src="../uploads/31901.png" style='width:50px; height:auto;'
+                                            class="profile-pic"> </td>
+                                    <td> Mohammed Ali</td>
+                                    <td> Level 6</td>
+                                    <td> <button class="addstd-btn btn btn--radius-2 btn--red m-r-55"
+                                            data-json='{"id": "126", "name": "Mohammed Ali Mohammed Ali Mohammed Ali", "level": "Level 7", "time":"09:00-11:00", "date":"15-7-2021", "imgpath":"../uploads/31900.png"}'> <i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add to Cards </button> </td>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td> 12349 </td>
+                                    <td> <img src="../uploads/31901.png" style='width:50px; height:auto;'
+                                            class="profile-pic"> </td>
+                                    <td> Mohammed Ahmed</td>
+                                    <td> Level 4</td>
+                                    <td> <button class="addstd-btn btn btn--radius-2 btn--red m-r-55"
+                                            data-json='{"id": "127", "name": "Mohammed Ahmed", "level": "Level 7", "time":"09:00-11:00", "date":"15-7-2021", "imgpath":"../uploads/31900.png"}'> <i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add to Cards </button> </td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        stds = document.querySelectorAll(".addstd-btn");
+
+
+        for (i = 0; i < stds.length; i++) {
+            stds[i].addEventListener('click', function () {
+                var studentdata = $(this).data('json');
+
+                setStdsCount(studentdata);
+
+            })
+        }
+
+        function onLoadSetStdsCount() {
+            let stdscount = localStorage.getItem("students-count");
+            stdscount = parseInt(stdscount);
+            if (stdscount) {
+                document.querySelector(".cards-btn span").textContent = stdscount;
+            } else {
+                document.querySelector(".cards-btn span").textContent = 0;
+            }
+        }
+        onLoadSetStdsCount();
+
+        function setStdsCount(studentdata) {
+            let stdscount = localStorage.getItem("students-count");
+            stdscount = parseInt(stdscount);
+            if (stdscount) {
+                localStorage.setItem("students-count", stdscount + 1);
+                document.querySelector(".cards-btn span").textContent = stdscount + 1;
+            } else {
+                localStorage.setItem("students-count", 1);
+                document.querySelector(".cards-btn span").textContent = 1;
+            }
+            addStudentsDetails(studentdata)
+        }
+
+        function addStudentsDetails(studentdata) {
+            let studentsCard = localStorage.getItem("student-data");
+            studentsCard = JSON.parse(studentsCard);
+
+            console.log(studentsCard);
+            if (studentsCard != null) {
+                studentsCard = {
+                    ...studentsCard,
+                    [studentdata.id]: studentdata
+                }
+
+            } else {
+                studentsCard = {
+                    [studentdata.id]: studentdata
+                }
+            }
+
+            localStorage.setItem("student-data", JSON.stringify(studentsCard))
+        }
+
+        function clearStorge(){
+            localStorage.clear();
+            let stdscount = localStorage.getItem("students-count");
+            stdscount = parseInt(stdscount);
+            if (stdscount) {
+                document.querySelector(".cards-btn span").textContent = stdscount;
+            } else {
+                document.querySelector(".cards-btn span").textContent = 0;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

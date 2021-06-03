@@ -6,34 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EDC | Registrar Dashboard | Enrollment</title>
 
-    <!-- Main CSS-->
+  <!-- Main CSS-->
 
-    <link  href="../static/css/style.css" rel="stylesheet" media="all">
-    <link  href="../static/css/pop_form_style.css" rel="stylesheet" media="all">
-    <link  href="../static/css/geometrical.css" rel="stylesheet" media="all">
+  <link href="../static/css/style.css" rel="stylesheet" media="all">
+  <link href="../static/css/pop_form_style.css" rel="stylesheet" media="all">
+  <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
 
-    <link  href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link  rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
-    <script src="../static/bootstrap/js/jquery.min.js"></script>
-    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
-    <script> 
-      $(function(){
-            $("#modalForm").on('show.bs.modal', function(event){
-              var btn = $(event.relatedTarget)
-              var stid = btn.data('id')
-              var modal = $(this)
-              modal.find('#sid').text(stid)
-              modal.find('#sid').val(stid)
-              modal.find('#sid').prop('readonly',true)
-                });
-              })
-    </script>
+  <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+  <script src="../static/bootstrap/js/jquery.min.js"></script>
+  <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+  <script>
+    $(function () {
+      $("#modalForm").on('show.bs.modal', function (event) {
+        var btn = $(event.relatedTarget)
+        var stid = btn.data('id')
+        var modal = $(this)
+        modal.find('#sid').text(stid)
+        modal.find('#sid').val(stid)
+        modal.find('#sid').prop('readonly', true)
+      });
+    })
+  </script>
   <!-- =======================================================
   ======================================================= -->
 </head>
 
 <body>
-  
+
   <!-- Start of the Modal -->
   <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -46,12 +46,12 @@
           </button>
         </div>
         <div id="studentDetails" class="modal-body"></div>
-        
+
         <div class="modal-body mx-3">
-          
+
           <form action="/reg_en" method="POST">
             <input name="id" id="sid" value="test">
-                  
+
             <div class="item">
               <select class="input--style-5" name="level" required="required">
                 <option disabled="disabled" selected="selected">Select Level</option>
@@ -68,9 +68,9 @@
                 <option>Level 8</option>
               </select>
             </div>
-            
+
             <div class="item">
-              <select class="input--style-5" name="type" required="required"> 
+              <select class="input--style-5" name="type" required="required">
                 <option selected="selected">Communication</option>
                 <option>English Club</option>
                 <option>IELTS Preparation</option>
@@ -85,29 +85,30 @@
                 <option>13:00 - 15:00</option>
                 <option>15:00 - 17:00</option>
                 <option>17:00 - 19:00</option>
-            </select>
+              </select>
             </div>
 
             <div class="item">
-            <select class="input--style-5" name="session" required="required">
-              <option disabled="disabled" selected="selected">Session</option>
-              <option>Regular</option>
-              <option>Midmonth</option>
-            </select>
+              <select class="input--style-5" name="session" required="required">
+                <option disabled="disabled" selected="selected">Session</option>
+                <option>Regular</option>
+                <option>Midmonth</option>
+              </select>
             </div>
 
             <div class="item">
               <input class="" type="date" name="endate" required="required">
             </div>
 
-          <div class="check">
-            <input type="checkbox" name="checkbox" id="cbox" class="c-box p-t-5" /> 
-            <label for="cbox" class=""> Repeat </label>
-          </div>
-          <br>
+            <div class="check">
+              <input type="checkbox" name="checkbox" id="cbox" class="c-box p-t-5" />
+              <label for="cbox" class=""> Repeat </label>
+            </div>
+            <br>
 
-          <button class="btn btn--radius-2 btn--red m-r-55" type="submit" onclick="return confirm('Sure you want to Proceed?')"> Update </button>
-                  
+            <button class="btn btn--radius-2 btn--red m-r-55" type="submit"
+              onclick="return confirm('Sure you want to Proceed?')"> Update </button>
+
           </form>
         </div>
 
@@ -117,55 +118,55 @@
   </div>
   <!-- End of Modal-->
 
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <div class="wrapper wrapper--w790">
-            <div class="card-5">
-                <div class="card-heading">
-                    <h2 class="title">Enrollment Form</h2>
-                </div>
-                <!-- Search Box-->
-                <div class="row p-30">
-                  <input type="text" id="search_box" name="search_box" class="input-box col-2 m-r-20" placeholder="Search..">
-                </div>
-                
-                <div class="card-body"> 
-                  <!-- Here Goes The Table -->
-                    <div id="dynamic_content">
+  <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="wrapper wrapper--w790">
+      <div class="card-5">
+        <div class="card-heading">
+          <h2 class="title">Enrollment Form</h2>
+        </div>
+        <!-- Search Box-->
+        <div class="row p-30">
+          <input type="text" id="search_box" name="search_box" class="input-box col-2 m-r-20" placeholder="Search..">
+        </div>
 
-                    </div>
-                </div>                
+        <div class="card-body">
+          <!-- Here Goes The Table -->
+          <div id="dynamic_content">
+
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 
 
-    
-<script>
-  $(document).ready(function(){
-    function load_data(page, search=''){
-      $.ajax({
-        url:"en",
-        method:"GET",
-        data:{page: page, search: search},
-        success: function(data){
-          $("#dynamic_content").html(data);
-        }
-      })
-    }
-    load_data(1)
-    $(document).on('click', '.page-link', function(){
-      var page = $(this).data('page_number');
-      var query = $('#search_box').val();
-      load_data(page, query);
+
+  <script>
+    $(document).ready(function () {
+      function load_data(page, search = '') {
+        $.ajax({
+          url: "en",
+          method: "GET",
+          data: { page: page, search: search },
+          success: function (data) {
+            $("#dynamic_content").html(data);
+          }
+        })
+      }
+      load_data(1)
+      $(document).on('click', '.page-link', function () {
+        var page = $(this).data('page_number');
+        var query = $('#search_box').val();
+        load_data(page, query);
+      });
+
+      $('#search_box').keyup(function () {
+        var query = $('#search_box').val();
+        load_data(1, query);
+      });
     });
 
-    $('#search_box').keyup(function(){
-      var query = $('#search_box').val();
-      load_data(1, query);
-    });
-  });
-
-</script>
+  </script>
 
 
 </body>

@@ -1,0 +1,242 @@
+package main
+
+import (
+	"fmt"
+	"io"
+	"math"
+	"net/http"
+	"os"
+	"path/filepath"
+	"strconv"
+)
+
+// Get Students Profiles
+func profilesPageHandler(w http.ResponseWriter, r *http.Request) {
+	templates.ExecuteTemplate(w, "stds_profile.html", nil)
+}
+
+// Generate Pagination for Display Students For Admin
+func profilesGetHandler(w http.ResponseWriter, r *http.Request) {
+
+	query := "SELECT * FROM students "
+	row_count := "SELECT count(*) FROM students "
+	pg := r.URL.Query().Get("page")
+	search := r.URL.Query().Get("search")
+
+	if len(pg) < 1 {
+		pg = "1"
+	}
+	page, err := strconv.Atoi(pg)
+	CheckErr(err)
+	if err != nil || page < 1 {
+		page = 1
+	}
+
+	if search != "" {
+		query += "WHERE id LIKE '%" + search + "%' or std_id LIKE '%" + search + "%' or std_name LIKE '%" + search + "%' "
+
+		row_count += "WHERE id LIKE '%" + search + "%' or std_id LIKE '%" + search + "%' or std_name LIKE '%" + search + "%' "
+	}
+
+	start := (page - 1) * limit
+
+	query += fmt.Sprintf("ORDER BY id DESC LIMIT %d, %d", start, limit)
+
+	stds := GetStudents(query)
+	count := GetTotalRows(row_count)
+
+	total_pages := int(math.Ceil(float64(count) / float64(limit)))
+
+	html := `<table id='myTable' class='table table-dark'>
+	<thead>
+	  <tr>
+		<th scope="col">id</th>
+		<th scope="col">Student Image</th>
+		<th scope="col">Student Name</th>
+		<th scope="col">Level</th>
+		<th scope="col">Edit</th>
+	  </tr>
+	</thead>
+	<tbody>`
+
+	if count > 0 {
+		for _, i := range stds {
+			if i.Pic_path == "" {
+				i.Pic_path = "../uploads/avatar.jpg"
+			}
+			html += `
+			<tr>
+				
+				<td>` + strconv.Itoa(i.id) + `</td>
+				<td> <img src="` + i.Pic_path + `" style='width:50px; height:auto;'> </td>
+				<td>` + i.Sname + `</td>
+				<td>` + i.Slvl + `</td>
+				<td>  
+				<td> <button class="popup btn btn--radius-2 btn--red m-r-55" data-id=` + strconv.Itoa(i.id) + ` data-pic= " ` + i.Pic_path + `" data-name= " ` + i.Sname + `"  data-phone= " ` + i.Sphone + `"  data-toggle="modal" data-target="#modal"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add/Edit Image </button> </td>
+				</td>
+
+			</tr>`
+		}
+	} else {
+		html += `
+			<tr>
+				<td>No Data Found ..</td>
+			</tr>
+		`
+	}
+	html += `
+	</tbody>
+	</table> <br>
+	<div align="center">
+	<ul class="pagination">
+	`
+
+	previous_link := ``
+	next_link := ``
+	page_link := ``
+	var pages_array []interface{}
+
+	if total_pages > 4 {
+		if page < 5 {
+			for cnt := 1; cnt <= 5; cnt++ {
+				pages_array = append(pages_array, cnt)
+			}
+			pages_array = append(pages_array, "...")
+			pages_array = append(pages_array, total_pages)
+		} else {
+			end_limit := total_pages - 5
+			if page > end_limit {
+				pages_array = append(pages_array, 1)
+				pages_array = append(pages_array, "...")
+				for cnt := end_limit; cnt <= total_pages; cnt++ {
+					pages_array = append(pages_array, cnt)
+				}
+
+			} else {
+				pages_array = append(pages_array, 1)
+				pages_array = append(pages_array, "...")
+				for cnt := page - 1; cnt <= page+1; cnt++ {
+					pages_array = append(pages_array, cnt)
+				}
+				pages_array = append(pages_array, "...")
+				pages_array = append(pages_array, total_pages)
+			}
+
+		}
+	} else {
+		for cnt := 1; cnt <= total_pages; cnt++ {
+			pages_array = append(pages_array, cnt)
+		}
+	}
+	// fmt.Println(pages_array)
+
+	// Links
+	for cnt := 0; cnt < len(pages_array); cnt++ {
+		if page == pages_array[cnt] {
+			x := pages_array[cnt].(int)
+			page_link += `
+			<li class="page-item active">
+				<a class="page-link" href="#">` + strconv.Itoa(x) + `
+					<span class="sr-only">(Current)</span>
+				</a>
+			</li>
+			`
+			previous_id := x - 1
+			if previous_id > 0 {
+				previous_link = `<li class="page-item"><a class="page-link" href="javascript:void(0)" data-page_number="` + strconv.Itoa(previous_id) + `">Previous</a></li>`
+			} else {
+				previous_link = `
+			  <li class="page-item disabled">
+				<a class="page-link" href="#">Previous</a>
+			  </li>
+			  `
+			}
+			next_id := x + 1
+			if next_id >= total_pages {
+				next_link = `
+			  <li class="page-item disabled">
+				<a class="page-link" href="#">Next</a>
+			  </li>
+				`
+			} else {
+				next_link = `<li class="page-item"><a class="page-link" href="javascript:void(0)" data-page_number="` + strconv.Itoa(next_id) + `">Next</a></li>`
+			}
+
+		} else {
+			if pages_array[cnt] == "..." {
+				page_link += `<li class="page-item disabled">
+				<a class="page-link" href="#">...</a>
+			  </li>
+			  `
+			} else {
+				page_link += `
+					<li class="page-item">
+						<a class="page-link" href="javascript:void(0)" data-page_number="` + strconv.Itoa(pages_array[cnt].(int)) + `">` + strconv.Itoa(pages_array[cnt].(int)) + `</a>
+					</li>
+				`
+			}
+		}
+	}
+
+	html += previous_link + page_link + next_link
+	fmt.Fprintf(w, html)
+	//templates.ExecuteTemplate(w, "ajax.html", stds)
+}
+
+type StudentData struct {
+	Quote string
+}
+
+func uploadProfilePicture(w http.ResponseWriter, r *http.Request) {
+	db := DbConn()
+	// The argument to FormFile must match the name attribute
+	// of the file input on the frontend
+	var std_id int
+	var err error
+	std_id, err = strconv.Atoi(r.FormValue("id"))
+	CheckErr(err)
+
+	fmt.Println(std_id)
+	file, fileHeader, err := r.FormFile("img")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		CheckErr(err)
+		return
+	}
+
+	defer file.Close()
+
+	// Create the uploads folder if it doesn't
+	// already exist
+	err = os.MkdirAll("./uploads", os.ModePerm)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	// Create a new file in the uploads directory
+	dst, err := os.Create(fmt.Sprintf("./uploads/%d%s", std_id, filepath.Ext(fileHeader.Filename)))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	defer dst.Close()
+
+	// Copy the uploaded file to the filesystem
+	// at the specified destination
+	_, err = io.Copy(dst, file)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var pic_path string
+	folder := "/uploads/"
+	pic_path = folder + r.FormValue("id") + filepath.Ext(fileHeader.Filename)
+	row, err := db.Query("UPDATE `edc_db`.`students` SET `std_pic` = ? WHERE `id` = ?", pic_path, std_id)
+	CheckErr(err)
+	row.Close()
+	defer db.Close()
+
+	http.Redirect(w, r, "profile", 302)
+}

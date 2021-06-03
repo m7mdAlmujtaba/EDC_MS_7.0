@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EDC | Generate Students Cards</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="">
+
+
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card-5">
+                <div class="card-heading">
+                    <h2 class="title">Enrollment Form</h2>
+                </div>
+                <!-- Search Box-->
+                <div class="row p-30">
+                    <input type="text" id="search_box" name="search_box" class="input-box col-2 m-r-20"
+                        placeholder="Search..">
+                </div>
+
+                <div class="card-body">
+                    <!-- Cards Page-->
+                    <div class="my-5 float-right">
+                        <a class="cards-btn btn btn-success" href="/cardshtml">Cards <span>0</span></a>
+                        <a class="btn text-light border" onclick="clearStorge()"><i class="fa fa-close"></i>
+                            <span>Clear</span></a>
+                    </div>
+
+                    <!-- Here Goes The Table -->
+                    <div id="dynamic_content">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            function load_data(page, search = '') {
+                $.ajax({
+                    url: "stds_cards_page",
+                    method: "GET",
+                    data: { page: page, search: search },
+                    success: function (data) {
+                        $("#dynamic_content").html(data);
+                    }
+                })
+            }
+            load_data(1)
+            $(document).on('click', '.page-link', function () {
+                var page = $(this).data('page_number');
+                var query = $('#search_box').val();
+                load_data(page, query);
+            });
+
+            $('#search_box').keyup(function () {
+                var query = $('#search_box').val();
+                load_data(1, query);
+            });
+        });
+    </script>
+
+    <script>
+function addStdtoCards(identifier) {
+        var studentdata = $(identifier).data('json');
+        setStdsCount(studentdata);
+}
+
+function onLoadSetStdsCount() {
+    let stdscount = localStorage.getItem("students-count");
+    stdscount = parseInt(stdscount);
+    if (stdscount) {
+        document.querySelector(".cards-btn span").textContent = stdscount;
+    } else {
+        document.querySelector(".cards-btn span").textContent = 0;
+    }
+}
+onLoadSetStdsCount();
+
+function setStdsCount(studentdata) {
+    let stdscount = localStorage.getItem("students-count");
+    stdscount = parseInt(stdscount);
+    if (stdscount) {
+        if (stdscount < 4) {
+            localStorage.setItem("students-count", stdscount + 1);
+            document.querySelector(".cards-btn span").textContent = stdscount + 1;
+            addStudentsDetails(studentdata);
+        } else {
+            console.log("you exceeded 4")
+        }
+
+    } else {
+        localStorage.setItem("students-count", 1);
+        document.querySelector(".cards-btn span").textContent = 1;
+        addStudentsDetails(studentdata);
+    }
+
+}
+
+function addStudentsDetails(studentdata) {
+    let studentsCard = localStorage.getItem("student-data");
+    studentsCard = JSON.parse(studentsCard);
+
+    // console.log(studentsCard);
+    if (studentsCard != null) {
+        studentsCard = {
+            ...studentsCard,
+            [studentdata.id]: studentdata
+        }
+
+    } else {
+        studentsCard = {
+            [studentdata.id]: studentdata
+        }
+    }
+
+    localStorage.setItem("student-data", JSON.stringify(studentsCard))
+}
+
+function clearStorge() {
+    localStorage.clear();
+    let stdscount = localStorage.getItem("students-count");
+    stdscount = parseInt(stdscount);
+    if (stdscount) {
+        document.querySelector(".cards-btn span").textContent = stdscount;
+    } else {
+        document.querySelector(".cards-btn span").textContent = 0;
+    }
+}
+
+
+    </script>
+
+</body>
+
+</html>

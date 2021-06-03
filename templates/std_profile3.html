@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDC | Students Profile Pictures</title>
+    <!-- Main CSS-->
+
+    <link href="../static/css/style.css" rel="stylesheet" media="all">
+    <link href="../static/css/geometrical.css" rel="stylesheet" media="all">
+    <link href="../static/css/pop_form_style.css" rel="stylesheet" media="all">
+
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/font-awesome.min.css">
+    <script src="../static/bootstrap/js/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/cropperjs/cropper.min.css">
+    <script src="../static/cropperjs/cropper.min.js" type="text/javascript"></script>
+</head>
+
+<style type="text/css">
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    .preview {
+        overflow: hidden;
+        width: 160px;
+        height: 160px;
+        margin: 10px;
+        border: 1px solid red;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        var image, cropper, reader, file;
+
+        $('#modal').on('show.bs.modal', function (event) {
+            var btn = $(event.relatedTarget)
+            var pic_path = btn.data('pic');
+
+            var modal = $(this);
+            modal.find("#image").attr("src", pic_path);
+            image = document.getElementById('image');
+        }).on('hidden.bs.modal', function () {
+            cropper.destroy();
+            cropper = null;
+        });
+
+        $('#startcrop').click(function () {
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 3,
+                preview: '.preview'
+            })
+            $('#crop').prop('disabled', false).css("pointer-events", "auto");;
+        })
+
+        $("#crop").click(function () {
+            canvas = cropper.getCroppedCanvas({
+                width: 160,
+                height: 160,
+            });
+
+            canvas.toBlob(function (blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    $.ajax({
+                        dataType: "json",
+                        url: "stds_profile_upload",
+                        type: 'POST',
+                        data: { image: base64data, id: 1234 },
+                        success: function (data) {
+                            $('#modal').modal('hide');
+
+                        }
+                    });
+                };
+            });
+        });
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    });
+
+
+</script>
+
+<body>
+
+    <button class="popup btn btn--radius-2 btn--red m-r-55" data-id="31906" data-pic="../uploads/31906.png"
+        data-toggle="modal" data-target="#modal"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add/Edit
+        Image </button>
+    <!--
+        //
+        // Upload and Crop Image Modal
+        //
+    -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Crop image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <!--  default image where we will set the src via jquery-->
+                                <img id="image" src="">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <form>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="newupload" id="newupload">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary" id="startcrop">Start Cropping </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="crop" disabled style="pointer-events: none;">Crop
+                        and Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
+        //
+        // Students Table
+        //
+    -->
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card-5">
+
+                <div class="card-heading">
+                    <h2 class="title">Display Sudents</h2>
+                </div>
+
+                <!-- Search Box-->
+                <div class="row p-30">
+                    <input type="text" id="search_box" name="search_box" class="input-img input-box col-2 m-r-20"
+                        placeholder="Search..">
+                </div>
+
+
+                <div class="card-body">
+                    <!-- Here Goes The Table -->
+                    <div id="dynamic_content">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            function load_data(page, search = '') {
+                $.ajax({
+                    url: "stds_profile",
+                    method: "GET",
+                    data: { page: page, search: search },
+                    success: function (data) {
+                        $("#dynamic_content").html(data);
+                    }
+                })
+            }
+            load_data(1)
+            $(document).on('click', '.page-link', function () {
+                var page = $(this).data('page_number');
+                var query = $('#search_box').val();
+                load_data(page, query);
+            });
+
+            $('#search_box').keyup(function () {
+                var query = $('#search_box').val();
+                load_data(1, query);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
